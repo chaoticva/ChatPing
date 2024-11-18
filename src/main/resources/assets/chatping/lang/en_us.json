@@ -1,0 +1,13 @@
+{
+  "text.autoconfig.chatping.title": "ChatPing Settings",
+  "text.autoconfig.chatping.option.names": "Names",
+  "text.autoconfig.chatping.option.sound": "Sound",
+  "text.autoconfig.chatping.option.volume": "Volume",
+  "text.autoconfig.chatping.option.pitch": "Pitch",
+  "sounds.chatping.blop": "Blop",
+  "sounds.chatping.gum": "Gum",
+  "sounds.chatping.ping": "Ping",
+  "sounds.chatping.pling": "Pling",
+  "sounds.chatping.pop": "Pop",
+  "sounds.chatping.ting": "Ting"
+}

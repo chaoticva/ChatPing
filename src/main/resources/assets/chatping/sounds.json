@@ -1,0 +1,38 @@
+{
+  "blop": {
+    "subtitle": "sounds.chatping.blop",
+    "sounds": [
+      "chatping:blop"
+    ]
+  },
+  "gum": {
+    "subtitle": "sounds.chatping.gum",
+    "sounds": [
+      "chatping:gum"
+    ]
+  },
+  "ping": {
+    "subtitle": "sounds.chatping.ping",
+    "sounds": [
+      "chatping:ping"
+    ]
+  },
+  "pling": {
+    "subtitle": "sounds.chatping.pling",
+    "sounds": [
+      "chatping:pling"
+    ]
+  },
+  "pop": {
+    "subtitle": "sounds.chatping.pop",
+    "sounds": [
+      "chatping:pop"
+    ]
+  },
+  "ting": {
+    "subtitle": "sounds.chatping.ting",
+    "sounds": [
+      "chatping:ting"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "chatping",
+  "version": "${version}",
+  "name": "ChatPing",
+  "description": "A mod that notifies you when your name is said in chat",
+  "authors": [
+    "chaoticva"
+  ],
+  "contact": {
+    "homepage": "https://github.com/chaoticva/ChatPing",
+    "sources": "https://github.com/chaoticva/ChatPing",
+    "issues": "https://github.com/chaoticva/ChatPing/issues"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/chatping/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.chaoticva.chatping.ChatPing"
+    ],
+    "modmenu": [
+      "me.chaoticva.chatping.integration.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "chatping.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu-badges-lib": "*"
+  },
+  "custom": {
+    "modmenu": {},
+    "mcb": [
+      {
+        "name": "Ping!",
+        "labelColor": -2190379,
+        "fillColor": -9827496,
+        "outlineColor": -4375151
+      }
+    ]
+  }
+}
