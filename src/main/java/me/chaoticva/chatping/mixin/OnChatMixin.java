@@ -6,8 +6,10 @@ import me.chaoticva.chatping.sound.ModSounds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.network.packet.s2c.play.ChatMessageS2CPacket;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,11 +18,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class OnChatMixin {
-    @Inject(at = @At("HEAD"), method = "onGameMessage")
-    private void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
+    @Inject(at = @At("HEAD"), method = "onChatMessage")
+    private void onChatMessage(ChatMessageS2CPacket packet, CallbackInfo ci) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         ModConfig config = ChatPing.config;
-        String message = packet.content().getString();
+        String message = packet.body().content();
+
+        handleMessage(player, config, message);
+    }
+
+    @Unique
+    private void handleMessage(ClientPlayerEntity player, ModConfig config, String message) {
         AtomicBoolean containsName = new AtomicBoolean(false);
 
         config.names.forEach(name -> {
@@ -41,5 +49,14 @@ public class OnChatMixin {
             case POP -> player.playSound(ModSounds.POP, volume, pitch);
             case TING -> player.playSound(ModSounds.TING, volume, pitch);
         }
+    }
+
+    @Inject(at = @At("HEAD"), method = "onGameMessage")
+    private void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        ModConfig config = ChatPing.config;
+        String message = packet.content().getString();
+
+        handleMessage(player, config, message);
     }
 }
