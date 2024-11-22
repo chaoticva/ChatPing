@@ -30,7 +30,7 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
-    "cloth-config-fabric": "${cloth_config_version}"
+    "cloth-config": "${cloth_config_version}"
   },
   "suggests": {
     "modmenu-badges-lib": "*"
