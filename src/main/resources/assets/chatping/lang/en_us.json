@@ -1,6 +1,7 @@
 {
   "text.autoconfig.chatping.title": "ChatPing Settings",
   "text.autoconfig.chatping.option.names": "Names",
+  "text.autoconfig.chatping.option.ignoreCapitalization": "Ignore Capitalization",
   "text.autoconfig.chatping.option.sound": "Sound",
   "text.autoconfig.chatping.option.volume": "Volume",
   "text.autoconfig.chatping.option.pitch": "Pitch",
