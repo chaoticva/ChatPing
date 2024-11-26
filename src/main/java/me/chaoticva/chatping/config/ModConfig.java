@@ -12,9 +12,10 @@ import java.util.List;
 @Config(name = ChatPing.MOD_ID)
 public class ModConfig implements ConfigData {
     public List<String> names = new ArrayList<>();
+    public boolean ignoreCapitalization = true;
 
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-    public Sound sound = Sound.PING;
+    public Sound sound = Sound.BLOP;
 
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int volume = 50;

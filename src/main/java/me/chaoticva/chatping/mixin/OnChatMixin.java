@@ -20,20 +20,30 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class OnChatMixin {
     @Inject(at = @At("HEAD"), method = "onChatMessage")
     private void onChatMessage(ChatMessageS2CPacket packet, CallbackInfo ci) {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        ModConfig config = ChatPing.config;
-        String message = packet.body().content();
+        handleMessage(packet.body().content());
+    }
 
-        handleMessage(player, config, message);
+    @Inject(at = @At("HEAD"), method = "onGameMessage")
+    private void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
+        handleMessage(packet.content().getString());
     }
 
     @Unique
-    private void handleMessage(ClientPlayerEntity player, ModConfig config, String message) {
+    private void handleMessage(String message) {
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        ModConfig config = ChatPing.config;
         AtomicBoolean containsName = new AtomicBoolean(false);
 
-        config.names.forEach(name -> {
-            if (message.contains(name.toLowerCase())) containsName.set(true);
-        });
+        for (String name : config.names) {
+            if (config.ignoreCapitalization) {
+                if (!message.toLowerCase().contains(name.toLowerCase())) continue;
+            } else {
+                if (!message.contains(name)) continue;
+            }
+
+            containsName.set(true);
+            break;
+        }
 
         if (player == null) return;
         if (!containsName.get()) return;
@@ -49,14 +59,5 @@ public class OnChatMixin {
             case POP -> player.playSound(ModSounds.POP, volume, pitch);
             case TING -> player.playSound(ModSounds.TING, volume, pitch);
         }
-    }
-
-    @Inject(at = @At("HEAD"), method = "onGameMessage")
-    private void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        ModConfig config = ChatPing.config;
-        String message = packet.content().getString();
-
-        handleMessage(player, config, message);
     }
 }
